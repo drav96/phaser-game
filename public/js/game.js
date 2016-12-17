@@ -160,7 +160,7 @@ function update () {
     currentSpeed = 300
   }
 
-  if (cursors.up.isDown) {
+  if (cursors.up.isDown && player.body.prev.y == player.body.y) {
       player.angle = -90
       currentSpeed = 500
     }
