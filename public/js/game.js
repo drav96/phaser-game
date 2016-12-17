@@ -30,6 +30,7 @@ function create () {
   land.fixedToCamera = true
 
   // The base of our player
+  game.physics.startSystem(Phaser.Physics.ARCADE);
   var startX = Math.round(Math.random() * (1000) - 500)
   var startY = Math.round(Math.random() * (1000) - 500)
   player = game.add.sprite(startX, startY, 'dude')
@@ -39,7 +40,9 @@ function create () {
 
   // This will force it to decelerate and limit its speed
   // player.body.drag.setTo(200, 200)
-  game.physics.enable(player, Phaser.Physics.ARCADE);
+
+  game.physics.arcade.enable(player);
+  player.body.gravity.y = 8000;
   player.body.maxVelocity.setTo(400, 400)
   player.body.collideWorldBounds = true
 
@@ -150,15 +153,19 @@ function update () {
   }
 
   if (cursors.left.isDown) {
-    player.angle -= 4
+    player.angle = 180
+    currentSpeed = 300
   } else if (cursors.right.isDown) {
-    player.angle += 4
+    player.angle = 0
+    currentSpeed = 300
   }
 
   if (cursors.up.isDown) {
-    // The speed we'll travel at
-    currentSpeed = 300
-  } else {
+      player.angle = -90
+      currentSpeed = 500
+    }
+
+     else {
     if (currentSpeed > 0) {
       currentSpeed -= 4
     }
